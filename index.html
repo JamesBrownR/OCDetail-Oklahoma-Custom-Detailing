@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OCDetail – Oklahoma Custom Detailing</title>
+  <meta name="description" content="OCDetail (Oklahoma Custom Detailing) – Professional auto detailing in Lawton, OK. Exterior & interior detailing, paint correction, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --green:#16a34a; /* primary green */
+      --green-600:#16a34a;
+      --green-700:#15803d;
+      --green-100:#dcfce7;
+      --black:#0b0b0b;
+      --dark:#111315;
+      --gray-900:#121212;
+      --gray-800:#1f2937;
+      --gray-700:#374151;
+      --gray-600:#4b5563;
+      --gray-500:#6b7280;
+      --gray-200:#e5e7eb;
+      --white:#ffffff;
+      --maxw:1200px;
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--black);color:var(--white)}
+    a{color:var(--green-100)}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    /* Header */
+    .topbar{position:sticky;top:0;z-index:1000;background:linear-gradient(180deg,#0f1412, #0a0a0a);border-bottom:1px solid rgba(255,255,255,.06)}
+    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .brand .logo{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #3bff7a, #0e3b22);display:grid;place-items:center;box-shadow:inset 0 0 10px rgba(0,0,0,.5)}
+    .brand h1{font-size:20px;line-height:1.1;margin:0;font-weight:700}
+    .quick{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);text-decoration:none;font-weight:600}
+    .btn-primary{background:var(--green-600);border-color:var(--green-700);color:#07150b}
+    .btn-primary:hover{filter:brightness(1.05)}
+    .btn-ghost{background:transparent;color:#e5ffee}
+    .phone-link{font-weight:700;color:#eafff1;text-decoration:none}
+    .nav{display:flex;gap:12px;flex-wrap:wrap}
+    .nav a{padding:8px 12px;border-radius:10px;text-decoration:none;color:#d9ffe6;border:1px solid rgba(255,255,255,.06)}
+    .nav a:hover{background:rgba(22,163,74,.15)}
+    /* Hero */
+    .hero{position:relative;isolation:isolate;background:linear-gradient(120deg,#0b0f0d 0%, #0c2014 60%, #0b0b0b 100%)}
+    .hero .inner{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;padding:48px 0}
+    .hero h2{font-size:44px;margin:0 0 10px}
+    .hero p{color:#d1f7df;font-size:18px;margin:0 0 22px}
+    .badges{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 22px}
+    .badge{background:rgba(22,163,74,.16);border:1px solid rgba(22,163,74,.35);padding:8px 12px;border-radius:999px;font-size:14px;color:#c5ffdc}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .gallery img{width:100%;height:130px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+    /* Sections */
+    section{padding:56px 0}
+    h3{font-size:28px;margin:0 0 10px}
+    p.lead{color:#bbf7d0}
+    .grid{display:grid;gap:20px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    @media (max-width:900px){
+      .hero .inner{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+    }
+    /* Info blocks */
+    .info{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .info-item{padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+    .info-item strong{color:#8df3ad}
+    .hours{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .hours div{display:flex;justify-content:space-between;border-bottom:1px dashed rgba(255,255,255,.12);padding:6px 0}
+    /* Reviews */
+    .reviews-wrap{display:grid;gap:16px}
+    .review{padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.01))}
+    .review .name{font-weight:700}
+    .stars{letter-spacing:1px}
+    .stars[data-score="5"]{color:#9df2b8}
+    .stars[data-score="4"]{color:#b5f5c8}
+    .stars[data-score="3"]{color:#d9ffd1}
+    .stars[data-score="2"], .stars[data-score="1"]{color:#ffb4b4}
+    .review .when{color:#9fe7ba;font-size:13px}
+    .review p{margin:10px 0 0;white-space:pre-line}
+    .load-more{display:flex;justify-content:center;margin-top:6px}
+    .load-more button{border:none;background:var(--green-600);color:#05140b;font-weight:700;padding:12px 18px;border-radius:999px}
+    .load-more button:hover{filter:brightness(1.05)}
+    /* Contact */
+    form{display:grid;gap:12px}
+    input, textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:#0f1311;color:#eaffef}
+    input::placeholder, textarea::placeholder{color:#9ad7ad}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width:700px){.form-row{grid-template-columns:1fr}}
+    .submit-row{display:flex;gap:12px;align-items:center}
+    .map{border:0;width:100%;height:380px;border-radius:16px}
+    footer{padding:26px 0;color:#bff7cf;border-top:1px solid rgba(255,255,255,.06);background:#0b0f0d}
+    /* Floating Call Button */
+    .fab-call{position:fixed;bottom:18px;right:18px;z-index:999;background:var(--green-600);color:#05250f;padding:14px 16px;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  </style>
+</head>
+<body>
+  <!-- Header / Top Bar with immediate call links -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true">
+          <!-- simple checkmark icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="#b7ffcf" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h1>OCDetail • Oklahoma Custom Detailing</h1>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="quick">
+        <a class="phone-link" href="tel:+14054927284">📞 (405) 492-7284</a>
+        <a class="btn btn-ghost" href="https://www.facebook.com/ocdetail580" target="_blank" rel="noopener">Facebook</a>
+        <!-- Square Appointments Booking Button: REPLACE YOUR_LOCATION_ID below -->
+        <a class="btn btn-primary" id="bookBtn" href="#book" onclick="openSquareBooking(event)">Book Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="container inner">
+      <div>
+        <h2>Detailing so clean it’s <span style="color:#8df3ad">OCD-level</span>.</h2>
+        <p>From quick cleans to full restorations — we make your ride look brand new. Family‑owned in Lawton, OK.</p>
+        <div class="badges">
+          <span class="badge">⭐ 4.9 average rating</span>
+          <span class="badge">📍 2015 NW Hoover Ave, Lawton</span>
+          <span class="badge">🕒 Open today 10AM–9PM</span>
+        </div>
+        <div class="cta">
+          <a class="btn btn-primary" href="tel:+14054927284">Call Now</a>
+          <a class="btn" href="#contact">Get a Quote</a>
+        </div>
+      </div>
+      <div class="card" style="padding:16px">
+        <div class="gallery" id="gallery">
+          <!-- Replace with actual images in your repo's /images folder -->
+          <img src="images/after-1.jpg" alt="Polished black sedan after detail" />
+          <img src="images/interior-1.jpg" alt="Deep-cleaned interior" />
+          <img src="images/engine-bay.jpg" alt="Clean engine bay" />
+          <img src="images/wheels.jpg" alt="Shining wheels" />
+          <img src="images/foam.jpg" alt="Foam wash" />
+          <img src="images/before-after.jpg" alt="Before and after comparison" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Info -->
+  <section id="services">
+    <div class="container grid grid-3">
+      <div class="card info-item">
+        <strong>Address</strong>
+        <p>2015 NW Hoover Ave, Lawton, OK 73505</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="btn" href="https://www.google.com/maps/place/OCDetail:+Oklahoma+Custom+Detailing/@34.6345172,-98.4597519,14z/data=!4m10!1m2!2m1!1soklahoma+lawton+auto+repair!3m6!1s0xae54709dd3d9126f:0x476febade0213a9!8m2!3d34.6345172!4d-98.4216431!15sChtva2xhaG9tYSBsYXd0b24gYXV0byByZXBhaXJaHSIbb2tsYWhvbWEgbGF3dG9uIGF1dG8gcmVwYWlykgEVY2FyX2RldGFpbGluZ19zZXJ2aWNlmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU10TjFwMldpMW5SUkFCqgFyCgcvbS8wazRqCggvbS8wNW1waAoIL20vMHo1M2sQASoPIgthdXRvIHJlcGFpcigAMh8QASIbQvKToDGIiolH78YZ9-z0SaFIUiBifuW9UQWLMh8QAiIbb2tsYWhvbWEgbGF3dG9uIGF1dG8gcmVwYWly4AEA-gEECAAQSQ!16s%2Fg%2F11t9jxkqgm?entry=ttu" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      </div>
+      <div class="card info-item">
+        <strong>Hours</strong>
+        <div class="hours">
+          <div><span>Monday</span><span>10 AM–9 PM</span></div>
+          <div><span>Tuesday</span><span>10 AM–9 PM</span></div>
+          <div><span>Wednesday</span><span>10 AM–9 PM</span></div>
+          <div><span>Thursday</span><span>10 AM–9 PM</span></div>
+          <div><span>Friday</span><span>10 AM–10 PM</span></div>
+          <div><span>Saturday</span><span>11 AM–10 PM</span></div>
+          <div><span>Sunday</span><span>1–7 PM</span></div>
+        </div>
+      </div>
+      <div class="card info-item">
+        <strong>Connect</strong>
+        <p><a href="https://www.facebook.com/ocdetail580" target="_blank" rel="noopener">Facebook Page</a></p>
+        <p>Email: <a href="mailto:Oklacustomdetail@gmail.com">Oklacustomdetail@gmail.com</a></p>
+        <p>Phone: <a href="tel:+14054927284">(405) 492‑7284</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section>
+    <div class="container">
+      <h3>Find Us</h3>
+      <p class="lead">Tap to navigate — we’re right here in Lawton.</p>
+      <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!4v0!6m8!1m7!3m6!1s0xae54709dd3d9126f:0x476febade0213a9!2sOCDetail:+Oklahoma+Custom+Detailing!3m4!1s0x0:0x476febade0213a9!8m2!3d34.6345172!4d-98.4216431"></iframe>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews">
+    <div class="container">
+      <h3>Customer Reviews</h3>
+      <p class="lead">Real customers. Real results. Most say we’re the best in town — see for yourself.</p>
+      <div class="reviews-wrap" id="reviewsWrap"></div>
+      <div class="load-more" id="loadMore" style="display:none"><button type="button" onclick="loadNextReviews()">Show more</button></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container grid grid-2">
+      <div class="card" style="padding:18px">
+        <h3>Get a Quote</h3>
+        <p class="lead">Tell us about your vehicle and we’ll get back fast.</p>
+        <form id="contactForm" onsubmit="return submitEmail(event)">
+          <div class="form-row">
+            <div>
+              <label class="sr-only" for="name">Name</label>
+              <input id="name" name="name" placeholder="Your Name" required />
+            </div>
+            <div>
+              <label class="sr-only" for="phone">Phone</label>
+              <input id="phone" name="phone" placeholder="Phone" inputmode="tel" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label class="sr-only" for="email">Email</label>
+              <input id="email" name="email" placeholder="Email" type="email" required />
+            </div>
+            <div>
+              <label class="sr-only" for="service">Service</label>
+              <input id="service" name="service" placeholder="Service (e.g., Full detail)" />
+            </div>
+          </div>
+          <div>
+            <label class="sr-only" for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Vehicle make/model, what you need, and preferred timing..."></textarea>
+          </div>
+          <div class="submit-row">
+            <button class="btn btn-primary" type="submit">Send Email</button>
+            <a class="btn" href="tel:+14054927284">Prefer calling? Tap here</a>
+          </div>
+          <p style="color:#90d9a6;font-size:13px;margin:6px 0 0">This sends an email to Oklacustomdetail@gmail.com using your email app.</p>
+        </form>
+      </div>
+      <div class="card" style="padding:18px">
+        <h3>Book Online</h3>
+        <p class="lead">Instant scheduling with Square Appointments.</p>
+        <ol>
+          <li>Click <strong>Book Now</strong> at the top.</li>
+          <li><em>Developer note:</em> In the code, replace <code>YOUR_LOCATION_ID</code> with the actual Square location ID to enable the booking widget/modal.</li>
+        </ol>
+        <div style="margin-top:14px">
+          <button class="btn btn-primary" onclick="openSquareBooking(event)">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>© <span id="year"></span> OCDetail • Oklahoma Custom Detailing</div>
+      <div>Made with ♻️ clean shine • <a href="https://www.facebook.com/ocdetail580" target="_blank" rel="noopener">Facebook</a></div>
+    </div>
+  </footer>
+
+  <!-- Floating call button for mobile -->
+  <a class="fab-call" href="tel:+14054927284">Call • (405) 492‑7284</a>
+
+  <script>
+    // ===== Replace this with your real Square location ID =====
+    const SQUARE_LOCATION_ID = 'YOUR_LOCATION_ID'; // <-- REPLACE YOUR_LOCATION_ID with actual Square Location ID
+    // ==========================================================
+
+    // Square Appointments (simple link open; you can swap to embed if desired)
+    function openSquareBooking(e){
+      e && e.preventDefault();
+      if(!SQUARE_LOCATION_ID || SQUARE_LOCATION_ID === 'YOUR_LOCATION_ID'){
+        alert('Developer: Replace YOUR_LOCATION_ID in index.html with the real Square Location ID.');
+        return;
+      }
+      // Example Appointments URL pattern – update if you have a direct booking URL
+      const bookingUrl = `https://squareup.com/appointments/book/${SQUARE_LOCATION_ID}`;
+      window.open(bookingUrl, '_blank');
+    }
+
+    // Contact form -> open mailto with prefilled body
+    function submitEmail(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const service = document.getElementById('service').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const subject = encodeURIComponent(`Quote request from ${name}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\n\nMessage:\n${message}`
+      );
+      window.location.href = `mailto:Oklacustomdetail@gmail.com?subject=${subject}&body=${body}`;
+      return false;
+    }
+
+    // Reviews data — main content preserved, services/likes/etc removed where requested
+    // All reviews are 5 stars EXCEPT: Juan Rodriguez, Information Center, Pi p.
+    const REVIEWS = [
+      {name:'Donita Williams', stars:5, when:'a month ago', text:`Called at the last minute on Friday for detailing and buffing scuff marks. Young man told us to bring it in, and he would stay as long as needed to get it done. He did an EXCELLENT JOB!!! We will definitely be spreading the word and taking our other vehicles in for detailing. GREAT PRICES!! GREAT WORK. GREAT CUSTOMER SERVICE, FRIENDLY.`},
+      {name:'Dylan Gesch', stars:5, when:'a year ago', text:`Scott and his co worker knocked out my car on a short notice and took there time doing it! They didn’t rush the job just to get it done. They went panel by panel making sure every part of the car was shining and good. I had previously drove my car through some tree branches and had a bunch of scratches all over my black car and they got almost all of them out I was amazed!! I highly recommend this company for anyone out there that wants a friendly, budget safe, and reliable detail.`},
+      {name:'Kathie Ogle', stars:5, when:'3 months ago', text:`The best detail I’ve ever had. This young man knows what he’s doing! My car was dirty & the worst part was the dog hair on interior. Car now looks better than when I bought it. Highly recommend!  I’ll be a repeat customer.`},
+      {name:'Anli Boone', stars:5, when:'2 years ago', text:`Absolutely amazing team! I've used them twice and loved the results each time. They picked up my truck and did full vehicle detail, leaving her spotless and looking brand new. Definitely recommend these guys. Trust them completely with my baby.`},
+      {name:'Crush Nemo', stars:5, when:'2 years ago', text:`When I seen the outcome of my vehicle I was astonished. I had tried somewhere else to get the stains and smell of whatever it was out of the car(I have 4 kids so no telling ). They couldn't do it!!\nI was disappointed but then I called  OCdetail...\nI called the guy he,was super friendly on the phone and his crew was all super respectful as well. My schedule runs super crazy and I needed the time changed to an ealier time and they managed to work that out too! Worked fast and Now no more stains and smells great   !! Not going anywhere else to get a detail done again.\nSuper happy with my van thanks again OCDEATIL!!! ❤`},
+      {name:'Juan Rodriguez', stars:1, when:'a year ago', text:`Had a Permaplate claim with them twice and never showed up or called back. Several calls and all they mentioned is that they will call me back and never did. When they answer the phone, they were too busy to give me a legit date to make it for the repair request. Both times over a month and they can’t seem to be able to properly meet any appointment. Just disappointed. Not reliable at all. Don’t know how they are  with actually doing their job since they never made it.`},
+      {name:'Crystal Overbay', stars:5, when:'3 years ago', text:`The only thing that surprised me more than the excellent work OCDetail performed on my car was the friendly, knowledgeable, and most importantly , passionate staff members. It is obvious that this company has a sense of pride in the work they do which shows in the end result. The car actually looked better when I picked it up from OCDetail compared to when I purchased it from the dealer.`},
+      {name:'christina harris', stars:5, when:'2 years ago', text:`Oklahoma Custom Detailing did a great job on my car! They were able to get all the pet hair out of my back seat! I would definitely use them again!`},
+      {name:'Sylver Rockefeller', stars:5, when:'3 years ago', text:`I absolutely love the services I received on my vehicle! Hands down the best detail shop around! I would recommend in a heart beat! I am very happy with how my car turned out. It's better then it was when I bought it! You can tell that they love what they do! The customer service there is wonderful, the prices are great, & the timing was perfect! If you haven't been there, just know that they are totally worth trying.`},
+      {name:'Tony Dedier', stars:5, when:'3 years ago', text:`Do not let the random parking lot with a small building fool you. The interior of my car looked better then when I bought it from the dealership. They are truly OCD about cleaning your car. Recommend 105%.`},
+      {name:'Deb 74', stars:5, when:'3 years ago', text:`Scott and his crew are the best in town! If you want your car, truck or SUV to shine, give them your business! OCD clean or is not truly clean!! 🥰`},
+      {name:'Trip Dubs', stars:5, when:'a year ago', text:`Great job on my interior detail, 12 year car looked brand-new, great service. Will recommend these guys to all my friends and coworkers`},
+      {name:'Information Center', stars:1, when:'2 years ago', text:`Called for full detail and scheduled time . They arrived 1.5 hours late . They did however call and explain that they would be 30 minutes late . Due to our buisy schedule we were forced to cancel and detail was not completed . Not sure how they recieved 5 stars .`},
+      {name:'tolulope oluyinka', stars:5, when:'a year ago', text:`Wonderful experience here. Everything was done to perfection and the owner was so sweet. 100% recommend.`},
+      {name:'William McClay', stars:5, when:'2 years ago', text:`Fast, friendly, knows what he's doing, and has great attention to detail. 10/10 would recommend!`},
+      {name:'Jenny Fromdabloc', stars:5, when:'2 years ago', text:`I thought my carpet was ruined until OCDetail brought it back to life! Truly great professionals!`},
+      {name:'Ben Dover', stars:5, when:'2 years ago', text:`Great guy, does great work, at a great price! Couldn't ask for more!`},
+      {name:'Pi p', stars:1, when:'a year ago', text:`Save your money from going here ,greeedy peopllee`},
+      {name:'Mame-Ñeta Attocknie', stars:5, when:'3 years ago', text:``},
+      {name:'Matt Hrnciar', stars:5, when:'3 years ago', text:`Positive\nPunctuality, Quality, Professionalism, Value…\nMore`},
+      {name:'Justin Owens', stars:5, when:'11 months ago', text:``},
+      {name:'Justin Owens', stars:5, when:'2 years ago', text:``},
+      {name:'MARGGILYN D CONGRESS', stars:5, when:'3 years ago', text:``}
+    ];
+
+    const CHUNK = 6; // show six initially, then reveal six more per click
+    let shown = 0;
+
+    function starString(n){
+      const full = '★'.repeat(n);
+      const empty = '☆'.repeat(5-n);
+      return full + empty;
+    }
+
+    function renderReviews(){
+      const wrap = document.getElementById('reviewsWrap');
+      wrap.innerHTML = '';
+      const end = Math.min(shown, REVIEWS.length);
+      for(let i=0;i<end;i++){
+        const r = REVIEWS[i];
+        const el = document.createElement('article');
+        el.className = 'review';
+        el.innerHTML = `
+          <div class="name">${r.name} <span class="when">• ${r.when}</span></div>
+          <div class="stars" data-score="${r.stars}" aria-label="${r.stars} out of 5 stars">${starString(r.stars)}</div>
+          ${r.text ? `<p>${r.text}</p>` : ''}
+        `;
+        wrap.appendChild(el);
+      }
+      const remaining = REVIEWS.length - end;
+      const btnWrap = document.getElementById('loadMore');
+      if(remaining>0){
+        btnWrap.style.display = 'flex';
+        const btn = btnWrap.querySelector('button');
+        const next = Math.min(CHUNK, remaining);
+        btn.textContent = `Show ${next} more (total ${remaining})`;
+      }else{
+        btnWrap.style.display = 'none';
+      }
+    }
+
+    function loadNextReviews(){
+      shown = Math.min(shown + CHUNK, REVIEWS.length);
+      renderReviews();
+    }
+
+    // init
+    shown = Math.min(CHUNK, REVIEWS.length);
+    renderReviews();
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoDetailing",
+    "name": "OCDetail — Oklahoma Custom Detailing",
+    "telephone": "+1-405-492-7284",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "2015 NW Hoover Ave",
+      "addressLocality": "Lawton",
+      "addressRegion": "OK",
+      "postalCode": "73505",
+      "addressCountry": "US"
+    },
+    "openingHours": [
+      "Mo 10:00-21:00",
+      "Tu 10:00-21:00",
+      "We 10:00-21:00",
+      "Th 10:00-21:00",
+      "Fr 10:00-22:00",
+      "Sa 11:00-22:00",
+      "Su 13:00-19:00"
+    ],
+    "url": "https://github.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing",
+    "sameAs": ["https://www.facebook.com/ocdetail580"],
+    "image": [
+      "https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/images/after-1.jpg"
+    ]
+  }
+  </script>
+</body>
+</html>
