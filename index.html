@@ -24,83 +24,594 @@
       --gray-200:#e5e7eb;
       --white:#ffffff;
       --maxw:1200px;
-      --radius:16px;
-      --shadow:0 10px 30px rgba(0,0,0,.25);
+      --radius:20px;
+      --shadow:0 10px 40px rgba(0,0,0,.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --glow: 0 0 20px rgba(22,163,74,.15);
     }
+    
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--black);color:var(--white)}
-    a{color:var(--green-100)}
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    
+    html{scroll-behavior:smooth}
+    
+    html,body{
+      margin:0;
+      padding:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--black);
+      color:var(--white);
+      line-height:1.6;
+    }
+    
+    a{
+      color:var(--green-100);
+      transition:var(--transition);
+    }
+    
+    .container{
+      max-width:var(--maxw);
+      margin:0 auto;
+      padding:0 24px;
+    }
+    
     /* Header */
-    .topbar{position:sticky;top:0;z-index:1000;background:linear-gradient(180deg,#0f1412, #0a0a0a);border-bottom:1px solid rgba(255,255,255,.06)}
-    .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-    .brand .logo{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #3bff7a, #0e3b22);display:grid;place-items:center;box-shadow:inset 0 0 10px rgba(0,0,0,.5)}
-    .brand h1{font-size:20px;line-height:1.1;margin:0;font-weight:700}
-    .quick{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.1);text-decoration:none;font-weight:600}
-    .btn-primary{background:var(--green-600);border-color:var(--green-700);color:#07150b}
-    .btn-primary:hover{filter:brightness(1.05)}
-    .btn-ghost{background:transparent;color:#e5ffee}
-    .phone-link{font-weight:700;color:#eafff1;text-decoration:none}
-    .nav{display:flex;gap:12px;flex-wrap:wrap}
-    .nav a{padding:8px 12px;border-radius:10px;text-decoration:none;color:#d9ffe6;border:1px solid rgba(255,255,255,.06)}
-    .nav a:hover{background:rgba(22,163,74,.15)}
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:linear-gradient(180deg,rgba(15,20,18,0.95), rgba(10,10,10,0.95));
+      backdrop-filter:blur(20px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      animation:slideDown 0.6s ease-out;
+    }
+    
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:16px 0;
+    }
+    
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      text-decoration:none;
+      transition:var(--transition);
+    }
+    
+    .brand:hover{
+      transform:scale(1.02);
+    }
+    
+    .brand .logo{
+      width:44px;
+      height:44px;
+      border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #3bff7a, #0e3b22);
+      display:grid;
+      place-items:center;
+      box-shadow:inset 0 0 10px rgba(0,0,0,.5), var(--glow);
+      transition:var(--transition);
+    }
+    
+    .brand:hover .logo{
+      box-shadow:inset 0 0 10px rgba(0,0,0,.5), 0 0 30px rgba(22,163,74,.3);
+    }
+    
+    .brand h1{
+      font-size:22px;
+      line-height:1.2;
+      margin:0;
+      font-weight:700;
+    }
+    
+    .quick{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      text-decoration:none;
+      font-weight:600;
+      transition:var(--transition);
+      position:relative;
+      overflow:hidden;
+    }
+    
+    .btn::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent);
+      transition:left 0.6s;
+    }
+    
+    .btn:hover::before{
+      left:100%;
+    }
+    
+    .btn-primary{
+      background:var(--green-600);
+      border-color:var(--green-700);
+      color:#07150b;
+      box-shadow:var(--glow);
+    }
+    
+    .btn-primary:hover{
+      filter:brightness(1.1);
+      transform:translateY(-2px);
+      box-shadow:0 0 25px rgba(22,163,74,.25);
+    }
+    
+    .btn-ghost{
+      background:transparent;
+      color:#e5ffee;
+    }
+    
+    .btn-ghost:hover{
+      background:rgba(22,163,74,.1);
+      border-color:rgba(22,163,74,.3);
+      transform:translateY(-1px);
+    }
+    
+    .phone-link{
+      font-weight:700;
+      color:#eafff1;
+      text-decoration:none;
+      transition:var(--transition);
+    }
+    
+    .phone-link:hover{
+      color:#3bff7a;
+      transform:scale(1.05);
+    }
+    
+    .nav{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    
+    .nav a{
+      padding:10px 16px;
+      border-radius:12px;
+      text-decoration:none;
+      color:#d9ffe6;
+      border:1px solid rgba(255,255,255,.08);
+      transition:var(--transition);
+      position:relative;
+    }
+    
+    .nav a:hover{
+      background:rgba(22,163,74,.15);
+      border-color:rgba(22,163,74,.3);
+      transform:translateY(-2px);
+    }
+    
     /* Hero */
-    .hero{position:relative;isolation:isolate;background:linear-gradient(120deg,#0b0f0d 0%, #0c2014 60%, #0b0b0b 100%)}
-    .hero .inner{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;padding:48px 0}
-    .hero h2{font-size:44px;margin:0 0 10px}
-    .hero p{color:#d1f7df;font-size:18px;margin:0 0 22px}
-    .badges{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 22px}
-    .badge{background:rgba(22,163,74,.16);border:1px solid rgba(22,163,74,.35);padding:8px 12px;border-radius:999px;font-size:14px;color:#c5ffdc}
-    .card{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
-    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-    .gallery img{width:100%;height:130px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.08)}
+    .hero{
+      position:relative;
+      isolation:isolate;
+      background:linear-gradient(120deg,#0b0f0d 0%, #0c2014 60%, #0b0b0b 100%);
+      padding:64px 0;
+      animation:fadeInUp 0.8s ease-out 0.2s both;
+    }
+    
+    @keyframes fadeInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .hero::before{
+      content:'';
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      background:radial-gradient(ellipse at center, rgba(22,163,74,.05) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    
+    .hero .inner{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:40px;
+      align-items:center;
+    }
+    
+    .hero h2{
+      font-size:52px;
+      margin:0 0 16px;
+      font-weight:700;
+      line-height:1.1;
+      animation:slideInLeft 0.8s ease-out 0.4s both;
+    }
+    
+    @keyframes slideInLeft {
+      from { transform: translateX(-50px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .hero p{
+      color:#d1f7df;
+      font-size:20px;
+      margin:0 0 28px;
+      animation:slideInLeft 0.8s ease-out 0.6s both;
+    }
+    
+    .badges{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      margin:16px 0 32px;
+      animation:slideInLeft 0.8s ease-out 0.8s both;
+    }
+    
+    .badge{
+      background:rgba(22,163,74,.16);
+      border:1px solid rgba(22,163,74,.35);
+      padding:10px 16px;
+      border-radius:999px;
+      font-size:14px;
+      color:#c5ffdc;
+      transition:var(--transition);
+      animation:bounceIn 0.6s ease-out;
+    }
+    
+    @keyframes bounceIn {
+      0%, 20%, 40%, 60%, 80% { transform: translateY(-5px); }
+      10%, 30%, 50%, 70%, 90% { transform: translateY(0); }
+      100% { transform: translateY(0); }
+    }
+    
+    .badge:hover{
+      transform:translateY(-3px) scale(1.05);
+      box-shadow:var(--glow);
+    }
+    
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      transition:var(--transition);
+      overflow:hidden;
+    }
+    
+    .card:hover{
+      transform:translateY(-5px);
+      box-shadow:0 20px 60px rgba(0,0,0,.4);
+      border-color:rgba(22,163,74,.2);
+    }
+    
+    .hero .cta{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      animation:slideInLeft 0.8s ease-out 1s both;
+    }
+    
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      padding:20px;
+    }
+    
+    .gallery img{
+      width:100%;
+      height:140px;
+      object-fit:cover;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.1);
+      transition:var(--transition);
+      cursor:pointer;
+    }
+    
+    .gallery img:hover{
+      transform:scale(1.05);
+      box-shadow:var(--glow);
+      border-color:rgba(22,163,74,.3);
+    }
+    
     /* Sections */
-    section{padding:56px 0}
-    h3{font-size:28px;margin:0 0 10px}
-    p.lead{color:#bbf7d0}
-    .grid{display:grid;gap:20px}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
+    section{
+      padding:80px 0;
+    }
+    
+    section:nth-child(even){
+      background:rgba(255,255,255,.01);
+    }
+    
+    h3{
+      font-size:32px;
+      margin:0 0 16px;
+      font-weight:700;
+    }
+    
+    p.lead{
+      color:#bbf7d0;
+      font-size:18px;
+      margin:0 0 32px;
+    }
+    
+    .grid{
+      display:grid;
+      gap:28px;
+    }
+    
+    .grid-3{
+      grid-template-columns:repeat(3,1fr);
+    }
+    
+    .grid-2{
+      grid-template-columns:repeat(2,1fr);
+    }
+    
+    /* Responsive */
     @media (max-width:900px){
       .hero .inner{grid-template-columns:1fr}
       .grid-3{grid-template-columns:1fr}
       .grid-2{grid-template-columns:1fr}
+      .hero h2{font-size:42px}
+      .container{padding:0 20px}
+      .topbar-inner{flex-wrap:wrap}
+      .nav{order:3;width:100%;justify-content:center}
     }
+    
     /* Info blocks */
-    .info{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .info-item{padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
-    .info-item strong{color:#8df3ad}
-    .hours{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .hours div{display:flex;justify-content:space-between;border-bottom:1px dashed rgba(255,255,255,.12);padding:6px 0}
+    .info{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:28px;
+    }
+    
+    .info-item{
+      padding:24px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.03);
+      transition:var(--transition);
+    }
+    
+    .info-item:hover{
+      transform:translateY(-5px);
+      border-color:rgba(22,163,74,.2);
+      box-shadow:var(--glow);
+    }
+    
+    .info-item strong{
+      color:#8df3ad;
+      font-size:18px;
+      display:block;
+      margin-bottom:12px;
+    }
+    
+    .hours{
+      display:grid;
+      gap:10px;
+      margin-top:16px;
+    }
+    
+    .hours div{
+      display:flex;
+      justify-content:space-between;
+      border-bottom:1px dashed rgba(255,255,255,.15);
+      padding:8px 0;
+      transition:var(--transition);
+    }
+    
+    .hours div:hover{
+      color:#8df3ad;
+    }
+    
     /* Reviews */
-    .reviews-wrap{display:grid;gap:16px}
-    .review{padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.01))}
-    .review .name{font-weight:700}
-    .stars{letter-spacing:1px}
+    .reviews-wrap{
+      display:grid;
+      gap:20px;
+    }
+    
+    .review{
+      padding:20px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.1);
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+      transition:var(--transition);
+      opacity:0;
+      animation:fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .review:hover{
+      transform:translateY(-3px);
+      border-color:rgba(22,163,74,.2);
+      box-shadow:var(--glow);
+    }
+    
+    .review .name{
+      font-weight:700;
+      font-size:16px;
+      margin-bottom:8px;
+    }
+    
+    .stars{
+      letter-spacing:2px;
+      font-size:18px;
+      margin-bottom:12px;
+    }
+    
     .stars[data-score="5"]{color:#9df2b8}
     .stars[data-score="4"]{color:#b5f5c8}
     .stars[data-score="3"]{color:#d9ffd1}
     .stars[data-score="2"], .stars[data-score="1"]{color:#ffb4b4}
-    .review .when{color:#9fe7ba;font-size:13px}
-    .review p{margin:10px 0 0;white-space:pre-line}
-    .load-more{display:flex;justify-content:center;margin-top:6px}
-    .load-more button{border:none;background:var(--green-600);color:#05140b;font-weight:700;padding:12px 18px;border-radius:999px}
-    .load-more button:hover{filter:brightness(1.05)}
+    
+    .review .when{
+      color:#9fe7ba;
+      font-size:14px;
+    }
+    
+    .review p{
+      margin:12px 0 0;
+      white-space:pre-line;
+      line-height:1.6;
+    }
+    
+    .load-more{
+      display:flex;
+      justify-content:center;
+      margin-top:32px;
+    }
+    
+    .load-more button{
+      border:none;
+      background:var(--green-600);
+      color:#05140b;
+      font-weight:700;
+      padding:16px 24px;
+      border-radius:999px;
+      transition:var(--transition);
+      cursor:pointer;
+      box-shadow:var(--glow);
+    }
+    
+    .load-more button:hover{
+      filter:brightness(1.1);
+      transform:translateY(-2px);
+      box-shadow:0 0 30px rgba(22,163,74,.3);
+    }
+    
     /* Contact */
-    form{display:grid;gap:12px}
-    input, textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:#0f1311;color:#eaffef}
-    input::placeholder, textarea::placeholder{color:#9ad7ad}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    @media (max-width:700px){.form-row{grid-template-columns:1fr}}
-    .submit-row{display:flex;gap:12px;align-items:center}
-    .map{border:0;width:100%;height:380px;border-radius:16px}
-    footer{padding:26px 0;color:#bff7cf;border-top:1px solid rgba(255,255,255,.06);background:#0b0f0d}
+    form{
+      display:grid;
+      gap:20px;
+    }
+    
+    input, textarea{
+      width:100%;
+      padding:16px 18px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.16);
+      background:#0f1311;
+      color:#eaffef;
+      transition:var(--transition);
+      font-size:16px;
+    }
+    
+    input:focus, textarea:focus{
+      outline:none;
+      border-color:var(--green-600);
+      box-shadow:0 0 0 3px rgba(22,163,74,.1);
+    }
+    
+    input::placeholder, textarea::placeholder{
+      color:#9ad7ad;
+    }
+    
+    .form-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+    
+    @media (max-width:700px){
+      .form-row{grid-template-columns:1fr}
+      .info{grid-template-columns:1fr}
+    }
+    
+    .submit-row{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    
+    .map{
+      border:0;
+      width:100%;
+      height:400px;
+      border-radius:20px;
+      transition:var(--transition);
+    }
+    
+    .map:hover{
+      box-shadow:var(--glow);
+    }
+    
+    footer{
+      padding:32px 0;
+      color:#bff7cf;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:#0b0f0d;
+    }
+    
     /* Floating Call Button */
-    .fab-call{position:fixed;bottom:18px;right:18px;z-index:999;background:var(--green-600);color:#05250f;padding:14px 16px;border-radius:999px;text-decoration:none;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .fab-call{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      z-index:999;
+      background:var(--green-600);
+      color:#05250f;
+      padding:16px 20px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:800;
+      box-shadow:0 10px 40px rgba(0,0,0,.4);
+      transition:var(--transition);
+      animation:pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 10px 40px rgba(0,0,0,.4), 0 0 0 0 rgba(22,163,74,.4); }
+      50% { box-shadow: 0 10px 40px rgba(0,0,0,.4), 0 0 0 20px rgba(22,163,74,0); }
+    }
+    
+    .fab-call:hover{
+      transform:scale(1.1);
+      box-shadow:0 15px 50px rgba(0,0,0,.5);
+    }
+    
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+    
+    /* Scroll animations */
+    .scroll-reveal{
+      opacity:0;
+      transform:translateY(30px);
+      transition:all 0.8s ease-out;
+    }
+    
+    .scroll-reveal.revealed{
+      opacity:1;
+      transform:translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -110,7 +621,7 @@
       <a class="brand" href="#top">
         <div class="logo" aria-hidden="true">
           <!-- simple checkmark icon -->
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="#b7ffcf" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="#b7ffcf" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h1>OCDetail • Oklahoma Custom Detailing</h1>
       </a>
@@ -133,7 +644,7 @@
   <section class="hero" id="top">
     <div class="container inner">
       <div>
-        <h2>Detailing so clean it’s <span style="color:#8df3ad">OCD-level</span>.</h2>
+        <h2>Detailing so clean it's <span style="color:#8df3ad">OCD-level</span>.</h2>
         <p>From quick cleans to full restorations — we make your ride look brand new. Family‑owned in Lawton, OK.</p>
         <div class="badges">
           <span class="badge">⭐ 4.9 average rating</span>
@@ -145,76 +656,78 @@
           <a class="btn" href="#contact">Get a Quote</a>
         </div>
       </div>
-      <div class="card" style="padding:16px">
+      <div class="card">
         <div class="gallery" id="gallery">
-          <!-- Replace with actual images in your repo's /images folder -->
-          <img src="images/after-1.jpg" alt="Polished black sedan after detail" />
-          <img src="images/interior-1.jpg" alt="Deep-cleaned interior" />
-          <img src="images/engine-bay.jpg" alt="Clean engine bay" />
-          <img src="images/wheels.jpg" alt="Shining wheels" />
-          <img src="images/foam.jpg" alt="Foam wash" />
-          <img src="images/before-after.jpg" alt="Before and after comparison" />
+          <!-- Updated with new GitHub image paths -->
+          <img src="https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/ocdetailscottimage1.png" alt="Professional auto detailing work" />
+          <img src="https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/ocdetailscottimage2.png" alt="Detailed car interior" />
+          <img src="https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/ocdetailscottimage3.png" alt="Engine bay cleaning service" />
+          <img src="https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/ocdetailscottimage4.png" alt="Wheel and tire detailing" />
+          <img src="https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/ocdetailscottimage5.png" alt="Foam wash process" />
+          <img src="https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/ocdetailscottimage6.png" alt="Before and after results" />
         </div>
       </div>
     </div>
   </section>
 
   <!-- Quick Info -->
-  <section id="services">
-    <div class="container grid grid-3">
-      <div class="card info-item">
-        <strong>Address</strong>
-        <p>2015 NW Hoover Ave, Lawton, OK 73505</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn" href="https://www.google.com/maps/place/OCDetail:+Oklahoma+Custom+Detailing/@34.6345172,-98.4597519,14z/data=!4m10!1m2!2m1!1soklahoma+lawton+auto+repair!3m6!1s0xae54709dd3d9126f:0x476febade0213a9!8m2!3d34.6345172!4d-98.4216431!15sChtva2xhaG9tYSBsYXd0b24gYXV0byByZXBhaXJaHSIbb2tsYWhvbWEgbGF3dG9uIGF1dG8gcmVwYWlykgEVY2FyX2RldGFpbGluZ19zZXJ2aWNlmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU10TjFwMldpMW5SUkFCqgFyCgcvbS8wazRqCggvbS8wNW1waAoIL20vMHo1M2sQASoPIgthdXRvIHJlcGFpcigAMh8QASIbQvKToDGIiolH78YZ9-z0SaFIUiBifuW9UQWLMh8QAiIbb2tsYWhvbWEgbGF3dG9uIGF1dG8gcmVwYWly4AEA-gEECAAQSQ!16s%2Fg%2F11t9jxkqgm?entry=ttu" target="_blank" rel="noopener">Open in Google Maps</a>
+  <section id="services" class="scroll-reveal">
+    <div class="container">
+      <div class="info">
+        <div class="card info-item">
+          <strong>Address</strong>
+          <p>2015 NW Hoover Ave, Lawton, OK 73505</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px">
+            <a class="btn" href="https://www.google.com/maps/place/OCDetail:+Oklahoma+Custom+Detailing/@34.6345172,-98.4597519,14z" target="_blank" rel="noopener">Open in Google Maps</a>
+          </div>
         </div>
-      </div>
-      <div class="card info-item">
-        <strong>Hours</strong>
-        <div class="hours">
-          <div><span>Monday</span><span>10 AM–9 PM</span></div>
-          <div><span>Tuesday</span><span>10 AM–9 PM</span></div>
-          <div><span>Wednesday</span><span>10 AM–9 PM</span></div>
-          <div><span>Thursday</span><span>10 AM–9 PM</span></div>
-          <div><span>Friday</span><span>10 AM–10 PM</span></div>
-          <div><span>Saturday</span><span>11 AM–10 PM</span></div>
-          <div><span>Sunday</span><span>1–7 PM</span></div>
+        <div class="card info-item">
+          <strong>Hours</strong>
+          <div class="hours">
+            <div><span>Monday</span><span>10 AM–9 PM</span></div>
+            <div><span>Tuesday</span><span>10 AM–9 PM</span></div>
+            <div><span>Wednesday</span><span>10 AM–9 PM</span></div>
+            <div><span>Thursday</span><span>10 AM–9 PM</span></div>
+            <div><span>Friday</span><span>10 AM–10 PM</span></div>
+            <div><span>Saturday</span><span>11 AM–10 PM</span></div>
+            <div><span>Sunday</span><span>1–7 PM</span></div>
+          </div>
         </div>
-      </div>
-      <div class="card info-item">
-        <strong>Connect</strong>
-        <p><a href="https://www.facebook.com/ocdetail580" target="_blank" rel="noopener">Facebook Page</a></p>
-        <p>Email: <a href="mailto:Oklacustomdetail@gmail.com">Oklacustomdetail@gmail.com</a></p>
-        <p>Phone: <a href="tel:+14054927284">(405) 492‑7284</a></p>
+        <div class="card info-item">
+          <strong>Connect</strong>
+          <p><a href="https://www.facebook.com/ocdetail580" target="_blank" rel="noopener">Facebook Page</a></p>
+          <p>Email: <a href="mailto:Oklacustomdetail@gmail.com">Oklacustomdetail@gmail.com</a></p>
+          <p>Phone: <a href="tel:+14054927284">(405) 492‑7284</a></p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Map -->
-  <section>
+  <section class="scroll-reveal">
     <div class="container">
       <h3>Find Us</h3>
-      <p class="lead">Tap to navigate — we’re right here in Lawton.</p>
-      <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!4v0!6m8!1m7!3m6!1s0xae54709dd3d9126f:0x476febade0213a9!2sOCDetail:+Oklahoma+Custom+Detailing!3m4!1s0x0:0x476febade0213a9!8m2!3d34.6345172!4d-98.4216431"></iframe>
+      <p class="lead">Tap to navigate — we're right here in Lawton.</p>
+      <iframe class="map" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.0738883392473!2d-98.42164268436582!3d34.63451721999084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xae54709dd3d9126f%3A0x476febade0213a9!2sOCDetail%3A%20Oklahoma%20Custom%20Detailing!5e0!3m2!1sen!2sus!4v1724641200000!5m2!1sen!2sus"></iframe>
     </div>
   </section>
 
   <!-- Reviews -->
-  <section id="reviews">
+  <section id="reviews" class="scroll-reveal">
     <div class="container">
       <h3>Customer Reviews</h3>
-      <p class="lead">Real customers. Real results. Most say we’re the best in town — see for yourself.</p>
+      <p class="lead">Real customers. Real results. Most say we're the best in town — see for yourself.</p>
       <div class="reviews-wrap" id="reviewsWrap"></div>
       <div class="load-more" id="loadMore" style="display:none"><button type="button" onclick="loadNextReviews()">Show more</button></div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact">
+  <section id="contact" class="scroll-reveal">
     <div class="container grid grid-2">
-      <div class="card" style="padding:18px">
+      <div class="card" style="padding:28px">
         <h3>Get a Quote</h3>
-        <p class="lead">Tell us about your vehicle and we’ll get back fast.</p>
+        <p class="lead">Tell us about your vehicle and we'll get back fast.</p>
         <form id="contactForm" onsubmit="return submitEmail(event)">
           <div class="form-row">
             <div>
@@ -244,17 +757,17 @@
             <button class="btn btn-primary" type="submit">Send Email</button>
             <a class="btn" href="tel:+14054927284">Prefer calling? Tap here</a>
           </div>
-          <p style="color:#90d9a6;font-size:13px;margin:6px 0 0">This sends an email to Oklacustomdetail@gmail.com using your email app.</p>
+          <p style="color:#90d9a6;font-size:14px;margin:12px 0 0">This sends an email to Oklacustomdetail@gmail.com using your email app.</p>
         </form>
       </div>
-      <div class="card" style="padding:18px">
+      <div class="card" style="padding:28px">
         <h3>Book Online</h3>
         <p class="lead">Instant scheduling with Square Appointments.</p>
-        <ol>
+        <ol style="margin:20px 0">
           <li>Click <strong>Book Now</strong> at the top.</li>
           <li><em>Developer note:</em> In the code, replace <code>YOUR_LOCATION_ID</code> with the actual Square location ID to enable the booking widget/modal.</li>
         </ol>
-        <div style="margin-top:14px">
+        <div style="margin-top:24px">
           <button class="btn btn-primary" onclick="openSquareBooking(event)">Book Now</button>
         </div>
       </div>
@@ -262,7 +775,7 @@
   </section>
 
   <footer>
-    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div class="container" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
       <div>© <span id="year"></span> OCDetail • Oklahoma Custom Detailing</div>
       <div>Made with ♻️ clean shine • <a href="https://www.facebook.com/ocdetail580" target="_blank" rel="noopener">Facebook</a></div>
     </div>
@@ -305,15 +818,14 @@
       return false;
     }
 
-    // Reviews data — main content preserved, services/likes/etc removed where requested
-    // All reviews are 5 stars EXCEPT: Juan Rodriguez, Information Center, Pi p.
+    // Reviews data — keeping ALL reviews as requested
     const REVIEWS = [
       {name:'Donita Williams', stars:5, when:'a month ago', text:`Called at the last minute on Friday for detailing and buffing scuff marks. Young man told us to bring it in, and he would stay as long as needed to get it done. He did an EXCELLENT JOB!!! We will definitely be spreading the word and taking our other vehicles in for detailing. GREAT PRICES!! GREAT WORK. GREAT CUSTOMER SERVICE, FRIENDLY.`},
-      {name:'Dylan Gesch', stars:5, when:'a year ago', text:`Scott and his co worker knocked out my car on a short notice and took there time doing it! They didn’t rush the job just to get it done. They went panel by panel making sure every part of the car was shining and good. I had previously drove my car through some tree branches and had a bunch of scratches all over my black car and they got almost all of them out I was amazed!! I highly recommend this company for anyone out there that wants a friendly, budget safe, and reliable detail.`},
-      {name:'Kathie Ogle', stars:5, when:'3 months ago', text:`The best detail I’ve ever had. This young man knows what he’s doing! My car was dirty & the worst part was the dog hair on interior. Car now looks better than when I bought it. Highly recommend!  I’ll be a repeat customer.`},
+      {name:'Dylan Gesch', stars:5, when:'a year ago', text:`Scott and his co worker knocked out my car on a short notice and took there time doing it! They didn't rush the job just to get it done. They went panel by panel making sure every part of the car was shining and good. I had previously drove my car through some tree branches and had a bunch of scratches all over my black car and they got almost all of them out I was amazed!! I highly recommend this company for anyone out there that wants a friendly, budget safe, and reliable detail.`},
+      {name:'Kathie Ogle', stars:5, when:'3 months ago', text:`The best detail I've ever had. This young man knows what he's doing! My car was dirty & the worst part was the dog hair on interior. Car now looks better than when I bought it. Highly recommend!  I'll be a repeat customer.`},
       {name:'Anli Boone', stars:5, when:'2 years ago', text:`Absolutely amazing team! I've used them twice and loved the results each time. They picked up my truck and did full vehicle detail, leaving her spotless and looking brand new. Definitely recommend these guys. Trust them completely with my baby.`},
       {name:'Crush Nemo', stars:5, when:'2 years ago', text:`When I seen the outcome of my vehicle I was astonished. I had tried somewhere else to get the stains and smell of whatever it was out of the car(I have 4 kids so no telling ). They couldn't do it!!\nI was disappointed but then I called  OCdetail...\nI called the guy he,was super friendly on the phone and his crew was all super respectful as well. My schedule runs super crazy and I needed the time changed to an ealier time and they managed to work that out too! Worked fast and Now no more stains and smells great   !! Not going anywhere else to get a detail done again.\nSuper happy with my van thanks again OCDEATIL!!! ❤`},
-      {name:'Juan Rodriguez', stars:1, when:'a year ago', text:`Had a Permaplate claim with them twice and never showed up or called back. Several calls and all they mentioned is that they will call me back and never did. When they answer the phone, they were too busy to give me a legit date to make it for the repair request. Both times over a month and they can’t seem to be able to properly meet any appointment. Just disappointed. Not reliable at all. Don’t know how they are  with actually doing their job since they never made it.`},
+      {name:'Juan Rodriguez', stars:1, when:'a year ago', text:`Had a Permaplate claim with them twice and never showed up or called back. Several calls and all they mentioned is that they will call me back and never did. When they answer the phone, they were too busy to give me a legit date to make it for the repair request. Both times over a month and they can't seem to be able to properly meet any appointment. Just disappointed. Not reliable at all. Don't know how they are  with actually doing their job since they never made it.`},
       {name:'Crystal Overbay', stars:5, when:'3 years ago', text:`The only thing that surprised me more than the excellent work OCDetail performed on my car was the friendly, knowledgeable, and most importantly , passionate staff members. It is obvious that this company has a sense of pride in the work they do which shows in the end result. The car actually looked better when I picked it up from OCDetail compared to when I purchased it from the dealer.`},
       {name:'christina harris', stars:5, when:'2 years ago', text:`Oklahoma Custom Detailing did a great job on my car! They were able to get all the pet hair out of my back seat! I would definitely use them again!`},
       {name:'Sylver Rockefeller', stars:5, when:'3 years ago', text:`I absolutely love the services I received on my vehicle! Hands down the best detail shop around! I would recommend in a heart beat! I am very happy with how my car turned out. It's better then it was when I bought it! You can tell that they love what they do! The customer service there is wonderful, the prices are great, & the timing was perfect! If you haven't been there, just know that they are totally worth trying.`},
@@ -350,6 +862,7 @@
         const r = REVIEWS[i];
         const el = document.createElement('article');
         el.className = 'review';
+        el.style.animationDelay = `${i * 0.1}s`;
         el.innerHTML = `
           <div class="name">${r.name} <span class="when">• ${r.when}</span></div>
           <div class="stars" data-score="${r.stars}" aria-label="${r.stars} out of 5 stars">${starString(r.stars)}</div>
@@ -374,10 +887,46 @@
       renderReviews();
     }
 
-    // init
-    shown = Math.min(CHUNK, REVIEWS.length);
-    renderReviews();
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // Scroll reveal animation
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('.scroll-reveal');
+      reveals.forEach(element => {
+        const windowHeight = window.innerHeight;
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+          element.classList.add('revealed');
+        }
+      });
+    }
+
+    // Initialize everything
+    function init() {
+      shown = Math.min(CHUNK, REVIEWS.length);
+      renderReviews();
+      document.getElementById('year').textContent = new Date().getFullYear();
+      
+      // Add scroll listener for reveal animations
+      window.addEventListener('scroll', revealOnScroll);
+      revealOnScroll(); // Check initial state
+      
+      // Add hover effects to gallery images
+      const galleryImages = document.querySelectorAll('.gallery img');
+      galleryImages.forEach(img => {
+        img.addEventListener('click', () => {
+          // Optional: Add lightbox functionality here
+          window.open(img.src, '_blank');
+        });
+      });
+    }
+
+    // Start when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   </script>
 
   <!-- LocalBusiness Schema -->
@@ -407,7 +956,7 @@
     "url": "https://github.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing",
     "sameAs": ["https://www.facebook.com/ocdetail580"],
     "image": [
-      "https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/images/after-1.jpg"
+      "https://raw.githubusercontent.com/JamesBrownR/OCDetail-Oklahoma-Custom-Detailing/main/ocdetailscottimage1.png"
     ]
   }
   </script>
