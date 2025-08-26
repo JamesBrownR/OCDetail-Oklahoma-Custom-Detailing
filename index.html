@@ -187,7 +187,8 @@
     .nav{
       display:flex;
       gap:16px;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
+      align-items:center;
     }
     
     .nav a{
@@ -374,8 +375,58 @@
       .grid-2{grid-template-columns:1fr}
       .hero h2{font-size:42px}
       .container{padding:0 20px}
-      .topbar-inner{flex-wrap:wrap}
-      .nav{order:3;width:100%;justify-content:center}
+      
+      .topbar-inner{
+        flex-direction:column;
+        gap:16px;
+        align-items:stretch;
+      }
+      
+      .brand{
+        align-self:center;
+      }
+      
+      .nav{
+        order:2;
+        justify-content:center;
+        flex-wrap:wrap;
+      }
+      
+      .quick{
+        order:1;
+        justify-content:center;
+        flex-wrap:wrap;
+      }
+      
+      .phone-link{
+        font-size:18px;
+        font-weight:800;
+      }
+    }
+    
+    @media (max-width:600px){
+      .brand h1{
+        font-size:18px;
+      }
+      
+      .brand .logo{
+        width:36px;
+        height:36px;
+      }
+      
+      .nav a{
+        padding:8px 12px;
+        font-size:14px;
+      }
+      
+      .btn{
+        padding:10px 14px;
+        font-size:14px;
+      }
+      
+      .phone-link{
+        font-size:16px;
+      }
     }
     
     /* Info blocks */
@@ -633,7 +684,6 @@
       <div class="quick">
         <a class="phone-link" href="tel:+14054927284">📞 (405) 492-7284</a>
         <a class="btn btn-ghost" href="https://www.facebook.com/ocdetail580" target="_blank" rel="noopener">Facebook</a>
-        <!-- Square Appointments Booking Button: REPLACE YOUR_LOCATION_ID below -->
         <a class="btn btn-primary" id="bookBtn" href="#book" onclick="openSquareBooking(event)">Book Now</a>
       </div>
     </div>
